@@ -7,5 +7,3 @@ services:
       - "3306:3306"
     environment:
       MYSQL_ROOT_PASSWORD: 1234
-    volumes:
-      - ./data/mysql:/var/lib/mysql
