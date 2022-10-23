@@ -2,6 +2,7 @@ package datalayer;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBConnector {
@@ -28,5 +29,10 @@ public class DBConnector {
             e.printStackTrace();
             throw new RuntimeException(e);
         }
+    }
+
+    public int getId(ResultSet resultSet) throws SQLException {
+        resultSet.next();
+        return resultSet.getInt(1);
     }
 }

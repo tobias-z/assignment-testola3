@@ -1,6 +1,6 @@
 package datalayer.booking;
 
-import dto.booking.Booking;
+import dto.Booking;
 import java.util.Collection;
 
 public interface BookingStorage {

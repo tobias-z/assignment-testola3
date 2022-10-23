@@ -3,7 +3,7 @@ package datalayer.booking;
 import static java.sql.Statement.RETURN_GENERATED_KEYS;
 
 import datalayer.DBConnector;
-import dto.booking.Booking;
+import dto.Booking;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -36,13 +36,8 @@ public class BookingStorageImpl implements BookingStorage {
             preparedStatement.setTime(5, new Time(booking.getEnd().toEpochSecond(LocalDate.now(), ZoneOffset.MAX)));
             preparedStatement.executeUpdate();
 
-            return getId(preparedStatement.getGeneratedKeys());
+            return dbConnector.getId(preparedStatement.getGeneratedKeys());
         });
-    }
-
-    private int getId(ResultSet resultSet) throws SQLException {
-        resultSet.next();
-        return resultSet.getInt(1);
     }
 
     @Override

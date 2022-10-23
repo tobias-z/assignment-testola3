@@ -7,7 +7,7 @@ import datalayer.booking.BookingStorageImpl;
 import datalayer.customer.CustomerStorage;
 import datalayer.customer.CustomerStorageImpl;
 import dto.CustomerCreation;
-import dto.booking.Booking;
+import dto.Booking;
 import integration.DBIntegrationTest;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
