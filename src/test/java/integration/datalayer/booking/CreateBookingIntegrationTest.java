@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class CreateBookingIntegrationIntegrationTest extends BookingIntegrationTest {
+public class CreateBookingIntegrationTest extends BookingIntegrationTest {
 
     @Test
     @DisplayName("can create booking")

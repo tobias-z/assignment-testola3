@@ -47,8 +47,12 @@ public class BookingStorageImpl implements BookingStorage {
 
     @Override
     public Collection<Booking> getBookingsForCustomer(int customerId) {
-        //TODO (tz): implement this!
-        throw new UnsupportedOperationException("Not yet implemented!");
+        return dbConnector.withConnection(connection -> {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM Bookings WHERE customerId = ?");
+            preparedStatement.setInt(1, customerId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            return mapToMultipleBookings(resultSet);
+        });
     }
 
     @Override
