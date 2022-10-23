@@ -20,4 +20,13 @@ public class DBConnector {
     public Connection getConnection() throws SQLException {
         return DriverManager.getConnection(connectionString, username, password);
     }
+
+    public <T> T withConnection(DBConnection<T> dbConnection) {
+        try (Connection connection = getConnection()) {
+            return dbConnection.commit(connection);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+    }
 }

@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import datalayer.DBConnector;
 import datalayer.customer.CustomerStorage;
 import datalayer.customer.CustomerStorageImpl;
-import integration.ContainerizedDbIntegrationTest;
+import integration.DBIntegrationTest;
 import java.sql.SQLException;
 import java.util.Date;
 import org.junit.jupiter.api.BeforeAll;
@@ -14,7 +14,7 @@ import servicelayer.customer.CustomerService;
 import servicelayer.customer.CustomerServiceException;
 import servicelayer.customer.CustomerServiceImpl;
 
-class SvcCreateCustomerTest extends ContainerizedDbIntegrationTest {
+class SvcCreateCustomerTest extends DBIntegrationTest {
 
     private CustomerService svc;
     private CustomerStorage storage;

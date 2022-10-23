@@ -20,8 +20,5 @@ jobs:
           distribution: 'temurin'
           cache: maven
 
-      - name: Run unit tests
+      - name: Run tests
         run: mvn test
-
-      - name: Run integration tests
-        run: mvn test -Dgroups=integration

@@ -8,12 +8,12 @@ import datalayer.DBConnector;
 import datalayer.customer.CustomerStorage;
 import datalayer.customer.CustomerStorageImpl;
 import dto.CustomerCreation;
-import integration.ContainerizedDbIntegrationTest;
+import integration.DBIntegrationTest;
 import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-class CreateCustomerTest extends ContainerizedDbIntegrationTest {
+class CreateCustomerTest extends DBIntegrationTest {
 
     private CustomerStorage customerStorage;
 

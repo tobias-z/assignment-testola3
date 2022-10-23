@@ -13,6 +13,8 @@ docker compose up --build
 `The project requires java 13 or later` 
 
 ```bash
-mvn test # to run all unit tests
-mvn test -DtestGroups=integration # to run all integration tests
+mvn test -Dgroups=unit
+mvn test -Dgroups=integration
+
+# or just 'mvn test' for all the tests
 ```

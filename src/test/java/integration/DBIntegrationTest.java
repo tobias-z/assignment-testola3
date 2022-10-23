@@ -7,7 +7,7 @@ import org.junit.jupiter.api.TestInstance;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Tag("integration")
-public class ContainerizedDbIntegrationTest {
+public class DBIntegrationTest {
 
     private static final String PASSWORD = "1234";
 
