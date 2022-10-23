@@ -1,4 +1,4 @@
-package integration.datalayer.booking;
+package integration;
 
 import com.github.javafaker.Faker;
 import datalayer.DBConnector;
@@ -8,7 +8,6 @@ import datalayer.customer.CustomerStorage;
 import datalayer.customer.CustomerStorageImpl;
 import dto.CustomerCreation;
 import dto.Booking;
-import integration.DBIntegrationTest;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeAll;
@@ -16,11 +15,11 @@ import org.junit.jupiter.api.BeforeAll;
 public class BookingIntegrationTest extends DBIntegrationTest {
 
     protected BookingStorage bookingStorage;
-    private CustomerStorage customerStorage;
+    protected CustomerStorage customerStorage;
 
     @BeforeAll
     public void setup() throws SQLException {
-        runMigration(4);
+        runMigration(5);
         DBConnector dbConnector = new DBConnector(getConnectionString(), "root", getDbPassword());
         bookingStorage = new BookingStorageImpl(dbConnector);
         customerStorage = new CustomerStorageImpl(dbConnector);
@@ -51,7 +50,7 @@ public class BookingIntegrationTest extends DBIntegrationTest {
     }
 
     private int createFakeCustomer(Faker faker) throws SQLException {
-        CustomerCreation c = new CustomerCreation(faker.name().firstName(), faker.name().lastName());
+        CustomerCreation c = new CustomerCreation(faker.name().firstName(), faker.name().lastName(), faker.phoneNumber().subscriberNumber(8));
         return customerStorage.createCustomer(c);
     }
 

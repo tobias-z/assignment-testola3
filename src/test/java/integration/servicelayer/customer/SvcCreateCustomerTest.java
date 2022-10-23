@@ -32,7 +32,7 @@ class SvcCreateCustomerTest extends DBIntegrationTest {
         var firstName = "John";
         var lastName = "Johnson";
         var bday = new Date(1239821l);
-        int id = svc.createCustomer(firstName, lastName, bday);
+        int id = svc.createCustomer(firstName, lastName, bday, "13371231");
 
         // Act
         var createdCustomer = storage.getCustomerWithId(id);

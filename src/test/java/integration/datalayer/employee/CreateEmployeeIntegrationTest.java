@@ -3,9 +3,7 @@ package integration.datalayer.employee;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dto.Employee;
-import java.time.LocalDate;
-import java.util.Optional;
+import integration.EmployeeIntegrationTest;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

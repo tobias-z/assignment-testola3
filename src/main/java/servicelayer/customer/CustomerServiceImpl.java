@@ -17,17 +17,21 @@ public class CustomerServiceImpl implements CustomerService {
     }
 
     @Override
-    public int createCustomer(String firstName, String lastName, Date birthdate) throws CustomerServiceException {
+    public int createCustomer(String firstName, String lastName, Date birthdate, String phoneNumber) throws CustomerServiceException {
         try {
-            return customerStorage.createCustomer(new CustomerCreation(firstName, lastName));
+            return customerStorage.createCustomer(new CustomerCreation(firstName, lastName, phoneNumber));
         } catch (SQLException throwables) {
             throw new CustomerServiceException(throwables.getMessage());
         }
     }
 
     @Override
-    public Customer getCustomerById(int id) throws SQLException {
-        return customerStorage.getCustomerWithId(id);
+    public Customer getCustomerById(int id) throws CustomerServiceException {
+        try {
+            return customerStorage.getCustomerWithId(id);
+        } catch (SQLException e) {
+            throw new CustomerServiceException(String.format("no customer found with id '%s'", id));
+        }
     }
 
     @Override

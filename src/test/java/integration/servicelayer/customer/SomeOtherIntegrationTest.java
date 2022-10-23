@@ -28,9 +28,9 @@ public class SomeOtherIntegrationTest extends DBIntegrationTest {
     }
 
     @Test
-    public void Stuff() throws CustomerServiceException, SQLException {
+    public void Stuff() throws CustomerServiceException {
         // Arrange
-        var id = svc.createCustomer("schmeep", "schmoop", Date.valueOf("1987-10-07"));
+        var id = svc.createCustomer("schmeep", "schmoop", Date.valueOf("1987-10-07"), "1231313");
 
         // Act
         var c = svc.getCustomerById(id);

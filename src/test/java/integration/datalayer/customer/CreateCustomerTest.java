@@ -33,7 +33,7 @@ class CreateCustomerTest extends DBIntegrationTest {
     private void addFakeCustomers(int numCustomers) throws SQLException {
         Faker faker = new Faker();
         for (int i = 0; i < numCustomers; i++) {
-            CustomerCreation c = new CustomerCreation(faker.name().firstName(), faker.name().lastName());
+            CustomerCreation c = new CustomerCreation(faker.name().firstName(), faker.name().lastName(), faker.phoneNumber().subscriberNumber(8));
             customerStorage.createCustomer(c);
         }
 
@@ -43,7 +43,7 @@ class CreateCustomerTest extends DBIntegrationTest {
     public void mustSaveCustomerInDatabaseWhenCallingCreateCustomer() throws SQLException {
         // Arrange
         // Act
-        customerStorage.createCustomer(new CustomerCreation("John", "Carlssonn"));
+        customerStorage.createCustomer(new CustomerCreation("John", "Carlssonn", "12341234"));
 
         // Assert
         var customers = customerStorage.getCustomers();
@@ -57,8 +57,8 @@ class CreateCustomerTest extends DBIntegrationTest {
     public void mustReturnLatestId() throws SQLException {
         // Arrange
         // Act
-        var id1 = customerStorage.createCustomer(new CustomerCreation("a", "b"));
-        var id2 = customerStorage.createCustomer(new CustomerCreation("c", "d"));
+        var id1 = customerStorage.createCustomer(new CustomerCreation("a", "b", "12341234"));
+        var id2 = customerStorage.createCustomer(new CustomerCreation("c", "d", "12341234"));
 
         // Assert
         assertEquals(1, id2 - id1);

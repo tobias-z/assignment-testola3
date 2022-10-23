@@ -1,4 +1,4 @@
-package integration.datalayer.employee;
+package integration;
 
 import datalayer.DBConnector;
 import datalayer.employee.EmployeeStorage;

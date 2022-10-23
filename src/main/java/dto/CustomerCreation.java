@@ -11,8 +11,11 @@ public class CustomerCreation {
 
     public final String firstname, lastname;
 
-    public CustomerCreation(String firstname, String lastname) {
+    private final String phoneNumber;
+
+    public CustomerCreation(String firstname, String lastname, String phoneNumber) {
         this.firstname = firstname;
         this.lastname = lastname;
+        this.phoneNumber = phoneNumber;
     }
 }
