@@ -4,15 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.github.javafaker.Faker;
+import datalayer.DBConnector;
 import datalayer.customer.CustomerStorage;
 import datalayer.customer.CustomerStorageImpl;
 import dto.CustomerCreation;
 import integration.ContainerizedDbIntegrationTest;
 import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
 
 class CreateCustomerTest extends ContainerizedDbIntegrationTest {
 
@@ -23,8 +22,7 @@ class CreateCustomerTest extends ContainerizedDbIntegrationTest {
     @BeforeAll
     public void Setup() throws SQLException {
         runMigration(2);
-
-        customerStorage = new CustomerStorageImpl(getConnectionString(), "root", getDbPassword());
+        customerStorage = new CustomerStorageImpl(new DBConnector(getConnectionString(), "root", getDbPassword()));
 
         var numCustomers = customerStorage.getCustomers().size();
         if (numCustomers < 100) {

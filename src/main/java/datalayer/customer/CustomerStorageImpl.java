@@ -1,30 +1,25 @@
 package datalayer.customer;
 
+import datalayer.DBConnector;
 import dto.Customer;
 import dto.CustomerCreation;
 
+import java.nio.file.DirectoryNotEmptyException;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerStorageImpl implements CustomerStorage {
-    private String connectionString;
-    private String username, password;
+    private final DBConnector dbConnector;
 
-    public CustomerStorageImpl(String conStr, String user, String pass){
-        connectionString = conStr;
-        username = user;
-        password = pass;
-    }
-
-    private Connection getConnection() throws SQLException {
-        return DriverManager.getConnection(connectionString, username, password);
+    public CustomerStorageImpl(DBConnector dbConnector){
+        this.dbConnector = dbConnector;
     }
 
     @Override
     public Customer getCustomerWithId(int customerId) throws SQLException {
         var sql = "select ID, firstname, lastname, birthdate from Customers where id = ?";
-        try (var con = getConnection();
+        try (var con = this.dbConnector.getConnection();
              var stmt = con.prepareStatement(sql)) {
             stmt.setInt(1, customerId);
 
@@ -41,7 +36,7 @@ public class CustomerStorageImpl implements CustomerStorage {
     }
 
     public List<Customer> getCustomers() throws SQLException {
-        try (var con = getConnection();
+        try (var con = this.dbConnector.getConnection();
              var stmt = con.createStatement()) {
             var results = new ArrayList<Customer>();
 
@@ -63,7 +58,7 @@ public class CustomerStorageImpl implements CustomerStorage {
 
     public int createCustomer(CustomerCreation customerToCreate) throws SQLException {
         var sql = "insert into Customers(firstname, lastname) values (?, ?)";
-        try (var con = getConnection();
+        try (var con = this.dbConnector.getConnection();
             var stmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             stmt.setString(1, customerToCreate.getFirstname());
             stmt.setString(2, customerToCreate.getLastname());

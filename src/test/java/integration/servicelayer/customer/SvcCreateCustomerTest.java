@@ -2,6 +2,7 @@ package integration.servicelayer.customer;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import datalayer.DBConnector;
 import datalayer.customer.CustomerStorage;
 import datalayer.customer.CustomerStorageImpl;
 import integration.ContainerizedDbIntegrationTest;
@@ -21,7 +22,7 @@ class SvcCreateCustomerTest extends ContainerizedDbIntegrationTest {
     @BeforeAll
     public void setup() {
         runMigration(3);
-        storage = new CustomerStorageImpl(getConnectionString(),"root", getDbPassword());
+        storage = new CustomerStorageImpl(new DBConnector(getConnectionString(), "root", getDbPassword()));
         svc = new CustomerServiceImpl(storage);
     }
 
