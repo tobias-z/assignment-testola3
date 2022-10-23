@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="BookingSystem" />
+        <module name="assignment-testola3" />
         <module name="database" />
       </profile>
     </annotationProcessing>

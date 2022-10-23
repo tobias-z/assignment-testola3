@@ -2,29 +2,21 @@ package integration;
 
 import org.flywaydb.core.Flyway;
 import org.flywaydb.core.api.configuration.FluentConfiguration;
-import org.testcontainers.containers.MySQLContainer;
-import org.testcontainers.utility.DockerImageName;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.TestInstance;
 
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
+@Tag("integration")
 public class ContainerizedDbIntegrationTest {
 
-    private static final int PORT = 3306;
-    private static final String PASSWORD = "testuser1234";
-
-    public static MySQLContainer mysql;
-
-    static {
-         mysql = (MySQLContainer) new MySQLContainer(DockerImageName.parse("mysql"))
-                .withPassword(PASSWORD)
-                .withExposedPorts(PORT);
-         mysql.start();
-    }
+    private static final String PASSWORD = "1234";
 
     protected String getDbPassword() {
         return PASSWORD;
     }
 
-    protected String getDbUrl(){
-        return "jdbc:mysql://"+mysql.getHost()+":"+mysql.getFirstMappedPort()+"/";
+    protected String getDbUrl() {
+        return "jdbc:mysql://localhost:3306/";
     }
 
     protected String getDb() {
@@ -39,12 +31,12 @@ public class ContainerizedDbIntegrationTest {
         String url = getDbUrl();
         String db = getDb();
         Flyway flyway = new Flyway(
-                new FluentConfiguration()
-                        .schemas(db)
-                        .defaultSchema(db)
-                        .createSchemas(true)
-                        .target(Double.toString(level))
-                        .dataSource(url, "root", PASSWORD)
+            new FluentConfiguration()
+                .schemas(db)
+                .defaultSchema(db)
+                .createSchemas(true)
+                .target(Double.toString(level))
+                .dataSource(url, "root", PASSWORD)
         );
         flyway.migrate();
     }

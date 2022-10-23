@@ -1,24 +1,21 @@
 package integration.datalayer.customer;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.github.javafaker.Faker;
 import datalayer.customer.CustomerStorage;
 import datalayer.customer.CustomerStorageImpl;
 import dto.CustomerCreation;
 import integration.ContainerizedDbIntegrationTest;
-import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.configuration.FluentConfiguration;
+import java.sql.SQLException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import java.sql.SQLException;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@Tag("integration")
 class CreateCustomerTest extends ContainerizedDbIntegrationTest {
+
     private CustomerStorage customerStorage;
 
     /* changed code */
@@ -48,14 +45,14 @@ class CreateCustomerTest extends ContainerizedDbIntegrationTest {
     public void mustSaveCustomerInDatabaseWhenCallingCreateCustomer() throws SQLException {
         // Arrange
         // Act
-        customerStorage.createCustomer(new CustomerCreation("John","Carlssonn"));
+        customerStorage.createCustomer(new CustomerCreation("John", "Carlssonn"));
 
         // Assert
         var customers = customerStorage.getCustomers();
         assertTrue(
-                customers.stream().anyMatch(x ->
-                        x.getFirstname().equals("John") &&
-                        x.getLastname().equals("Carlssonn")));
+            customers.stream().anyMatch(x ->
+                x.getFirstname().equals("John") &&
+                    x.getLastname().equals("Carlssonn")));
     }
 
     @Test

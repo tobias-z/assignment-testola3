@@ -1,6 +1,13 @@
 package unit.servicelayer.customer;
 
+import static org.mockito.Mockito.argThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import datalayer.customer.CustomerStorage;
+import java.sql.SQLException;
+import java.util.Date;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
@@ -8,11 +15,6 @@ import org.junit.jupiter.api.TestInstance;
 import servicelayer.customer.CustomerService;
 import servicelayer.customer.CustomerServiceException;
 import servicelayer.customer.CustomerServiceImpl;
-
-import java.sql.SQLException;
-import java.util.Date;
-
-import static org.mockito.Mockito.*;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 @Tag("unit")
@@ -37,7 +39,7 @@ public class CreateCustomerTest {
         // Act
         var firstName = "a";
         var lastName = "b";
-        var birthdate = new Date(123456789l);
+        var birthdate = new Date(123456789L);
 
         customerService.createCustomer(firstName, lastName, birthdate);
 
